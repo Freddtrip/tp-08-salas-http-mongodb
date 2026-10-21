@@ -1,0 +1,73 @@
+<h2>Nueva reserva</h2>
+
+<% if (typeof errores !== "undefined" && errores.length > 0) { %>
+    <div role="alert">
+        <ul>
+            <% errores.forEach((error) => { %>
+                <li><%= error %></li>
+            <% }); %>
+        </ul>
+    </div>
+<% } %>
+
+<form action="/reservas" method="POST">
+
+    <label for="estudiante">Estudiante:</label>
+    <input
+        type="text"
+        id="estudiante"
+        name="estudiante"
+        value="<%= typeof valores !== 'undefined' ? valores.estudiante : '' %>"
+    >
+
+    <label for="email">Email:</label>
+    <input
+        type="email"
+        id="email"
+        name="email"
+        value="<%= typeof valores !== 'undefined' ? valores.email : '' %>"
+    >
+
+    <label for="sala">Sala:</label>
+    <select id="sala" name="sala">
+        <option value="">Seleccione una sala</option>
+
+        <% salasPermitidas.forEach((sala) => { %>
+            <option
+                value="<%= sala %>"
+                <%= typeof valores !== "undefined" && valores.sala === sala ? "selected" : "" %>
+            >
+                <%= sala %>
+            </option>
+        <% }); %>
+    </select>
+
+    <label for="fecha">Fecha:</label>
+    <input
+        type="date"
+        id="fecha"
+        name="fecha"
+        value="<%= typeof valores !== 'undefined' ? valores.fecha : '' %>"
+    >
+
+    <label for="turno">Turno:</label>
+    <select id="turno" name="turno">
+        <option value="">Seleccione un turno</option>
+        <option value="Mañana">Mañana</option>
+        <option value="Tarde">Tarde</option>
+        <option value="Noche">Noche</option>
+    </select>
+
+    <label for="personas">Cantidad de personas:</label>
+    <input
+        type="number"
+        id="personas"
+        name="personas"
+        min="1"
+        max="6"
+        value="<%= typeof valores !== 'undefined' ? valores.personas : '' %>"
+    >
+
+    <button type="submit">Crear reserva</button>
+
+</form>
