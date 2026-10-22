@@ -19,11 +19,16 @@ Partí de mi TP 07 (`tp-07-salas-mongodb`) y lo copié con el nombre `tp-08-sala
 2. IP permitida: mi IP pública actual, agregada con el botón "Add Current IP Address" de Atlas. 
 3. Copiar la plantilla y completar con los datos reales:
 
-       PORT=3000
-        NODE_ENV=development
-        MONGODB_URI=mongodb+srv://USUARIO:CLAVE@HOST/reservas_salas_u8?retryWrites=true&w=majority
+       copy .env.example .env
 
-   `.env.example` tiene `PORT`, `NODE_ENV` y una URI de Atlas con marcadores (`USUARIO`, `CLAVE`, `HOST`) y la base `reservas_salas_u8`. Los marcadores son ilustrativos: no permiten conectar. El `.env` real no  entrego.
+   La plantilla `.env.example` tiene este contenido, con marcadores ilustrativos que no permiten conectar:
+
+       PORT=3000
+       NODE_ENV=development
+       MONGODB_URI=mongodb+srv://USUARIO:CLAVE@HOST/reservas_salas_u8?retryWrites=true&w=majority
+
+   El `.env` real, con los datos de conexión, no se entrega.
+
 
 **DNS:** se conserva la corrección acordada: en `src/config/base-datos.js` se configuran los resolutores `8.8.8.8` y `1.1.1.1` una sola vez, antes de conectar.
 
@@ -104,8 +109,8 @@ Resultados observados en mis pruebas.
 | Personas true, arreglo, objeto | COMPLETAR |
 | POST sin cuerpo / JSON mal formado | COMPLETAR |
 | Campos extra estado o _id | COMPLETAR |
-| Filtro exacto por sala / sin coincidencias | COMPLETAR |
-| Sala repetida como parámetro | COMPLETAR |
+| Filtro exacto por sala / sin coincidencias | GET `/api/reservas` con `sala=Sala Norte`: 200 y las 2 reservas; con `sala=Sala Sur`: 200 y `[]` |
+| Sala repetida como parámetro | GET `/api/reservas` con `sala=Sala Norte` y `sala=Sala Sur`: 400 |
 | Listar dos veces | COMPLETAR |
 | Formulario válido / inválido | COMPLETAR |
 | /estado y vistas | COMPLETAR |
